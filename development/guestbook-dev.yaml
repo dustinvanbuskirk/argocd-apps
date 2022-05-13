@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook-dev
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/dustinvanbuskirk/promotion-repository-example.git
+    targetRevision: HEAD
+    path: development
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: development
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
